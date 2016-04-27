@@ -25,7 +25,7 @@ PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://libtorrent.rakshasa.no"
 PKG_URL="http://rtorrent.net/downloads/$PKG_NAME-$PKG_VERSION.tar.gz"
-PKG_DEPENDS_TARGET="toolchain zlib libressl curl ncurses"
+PKG_DEPENDS_TARGET="toolchain zlib libressl curl netbsd-curses"
 PKG_PRIORITY="optional"
 PKG_SHORTDESC="libtorrent"
 PKG_LONGDESC="libtorrent"
@@ -42,3 +42,7 @@ PKG_CONFIGURE_OPTS_TARGET="--disable-shared \
             --without-kqueue \
             --with-posix-fallocate \
             --with-zlib=$SYSROOT_PREFIX/usr"
+
+pre_configure_target() {
+  export LIBS="-lterminfo"
+}

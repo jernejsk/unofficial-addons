@@ -25,7 +25,7 @@ PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.gnu.org/software/screen/"
 PKG_URL="http://ftp.gnu.org/gnu/screen/screen-${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain ncurses"
+PKG_DEPENDS_TARGET="toolchain netbsd-curses"
 PKG_PRIORITY="optional"
 PKG_SECTION="shell/console"
 PKG_SHORTDESC="terminal multiplexor with VT100/ANSI terminal emulation"
@@ -48,6 +48,7 @@ PKG_CONFIGURE_OPTS_TARGET="ac_cv_header_utempter_h=no \
 
 pre_configure_target() {
   export LDFLAGS=`echo $LDFLAGS | sed -e "s|-Wl,--as-needed||"`
+  export LIBS="-lterminfo"
 
 # screen fails to build in subdirs
   cd $ROOT/$PKG_BUILD

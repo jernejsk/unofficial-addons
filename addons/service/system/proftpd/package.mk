@@ -26,7 +26,7 @@ PKG_ARCH="any"
 PKG_LICENSE="OSS"
 PKG_SITE="http://www.proftpd.org/"
 PKG_URL="ftp://ftp.proftpd.org/distrib/source/$PKG_NAME-$PKG_VERSION.tar.gz"
-PKG_DEPENDS_TARGET="toolchain ncurses libcap whois pcre libressl"
+PKG_DEPENDS_TARGET="toolchain netbsd-curses libcap whois pcre libressl"
 PKG_PRIORITY="optional"
 PKG_SECTION="service/system"
 PKG_SHORTDESC="Highly configurable GPL-licensed FTP server software"
@@ -62,6 +62,7 @@ pre_build_target() {
 pre_configure_target() {
   export CFLAGS="$CFLAGS -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -I$SYSROOT_PREFIX/usr/include/ncurses -I$ROOT/$PKG_BUILD/.$TARGET_NAME/include/"
   export LDFLAGS="$LDFLAGS -L$ROOT/$PKG_BUILD/.$TARGET_NAME/lib"
+  export LIBS="-lterminfo"
 }
 
 makeinstall_target() {

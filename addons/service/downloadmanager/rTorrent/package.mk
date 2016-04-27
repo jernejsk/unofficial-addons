@@ -25,7 +25,7 @@ PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://libtorrent.rakshasa.no"
 PKG_URL=""
-PKG_DEPENDS_TARGET="toolchain libressl curl ncurses libtorrent zlib xmlrpc-c rutorrent miniupnpc rtorrent"
+PKG_DEPENDS_TARGET="toolchain libressl curl netbsd-curses libtorrent zlib xmlrpc-c rutorrent miniupnpc rtorrent"
 PKG_PRIORITY="optional"
 PKG_SECTION="service/downloadmanager"
 PKG_SHORTDESC="rTorrent: This is the free BitTorrent client rtorrent packed for OpenELEC"
@@ -40,6 +40,10 @@ PKG_ADDON_REPOVERSION="7.0"
 PKG_AUTORECONF="no"
 
 PKG_MAINTAINER="Daniel Forsberg (jenkins101)"
+
+pre_configure_target() {
+  export LIBS="-lterminfo"
+}
 
 make_target() {
   : # nop

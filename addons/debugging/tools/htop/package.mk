@@ -25,7 +25,7 @@ PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://htop.sourceforge.net/"
 PKG_URL="http://hisham.hm/htop/releases/$PKG_VERSION/$PKG_NAME-$PKG_VERSION.tar.gz"
-PKG_DEPENDS_TARGET="toolchain ncurses"
+PKG_DEPENDS_TARGET="toolchain netbsd-curses"
 PKG_PRIORITY="optional"
 PKG_SECTION="debug/tools"
 PKG_SHORTDESC="htop: Htop is an ncurses based interactive process viewer for Linux."
@@ -50,6 +50,8 @@ PKG_CONFIGURE_OPTS_TARGET="ac_cv_func_malloc_0_nonnull=yes \
             --with-gnu-ld"
 
 pre_configure_target() {
+  export LIBS="-lterminfo"
+  
 # htop fails to build in subdirs
   cd $ROOT/$PKG_BUILD
     rm -rf .$HOST_NAME
