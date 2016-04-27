@@ -47,7 +47,7 @@ pre_configure_target() {
   sed -i -e 's/ac_cv_linux_vers=unknown/ac_cv_linux_vers=2/' ../configure
 }
 
-pre_build_target() {
+post_configure_target() {
   # discard native system includes
   sed -i "s%-I/usr/include%%g" Makefile
 }
